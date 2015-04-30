@@ -1,0 +1,8 @@
+@media(min-width: 600px){
+	.field.date					{ width:67%; float:left; }
+	.field.date label			{ width:43% }
+	.field.date .middleColumn	{ width:48%; }
+	.field.time					{ width:31.9%; float:right; }
+	.field.time label			{ display:none; }
+	.field.time .middleColumn	{ width:100%; }
+}
