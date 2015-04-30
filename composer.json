@@ -2,7 +2,7 @@
 	"name": "iqnection-pages/appointmentpage",
 	"description": "SilverStripe 3 Appointment Page",
 	"type": "silverstripe-module",
-	"keywords": ["iqnection"],
+	"keywords": ["iqnection","pages"],
 	"authors": [
 		{
 			"name": "IQnection",
@@ -10,7 +10,8 @@
 		}
 	],
 	"require": {
-		"silverstripe/framework": ">=3.0"
+		"silverstripe/framework": ">=3.0",
+		"iqnection-pages/basepages":"*"
 	},
 	"extra": {
 		"installer-name": "iq-appointmentpage"
