@@ -24,6 +24,11 @@
 			"Title" => "Title",
 			"Date" => "Date"
 		);
+		
+		public function canCreate($member = null) { return true; }
+		public function canDelete($member = null) { return true; }
+		public function canEdit($member = null)   { return true; }
+		public function canView($member = null)   { return true; }
 	}
 	
 	class AppointmentFormSubmission extends DataObject
@@ -52,6 +57,10 @@
 		);
 		
 		private static $default_sort = "Created DESC";	
+		
+		public function canDelete($member = null) { return true; }
+		public function canEdit($member = null)   { return true; }
+		public function canView($member = null)   { return true; }
 	}
 	
 	class AppointmentPage extends FormPage
