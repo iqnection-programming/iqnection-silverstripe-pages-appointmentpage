@@ -31,7 +31,7 @@
 		public function canView($member = null)   { return true; }
 	}
 	
-	class AppointmentFormSubmission extends DataObject
+	class AppointmentPageSubmission extends DataObject
 	{
 		private static $db = array( 
 			"FirstName" => "Varchar(255)", 
@@ -65,8 +65,6 @@
 	
 	class AppointmentPage extends FormPage
 	{
-		
-		public $submission_class = "AppointmentFormSubmission";
 		
 		static $db = array(
 			"BlockWeekends" => "Boolean",
