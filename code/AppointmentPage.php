@@ -124,6 +124,66 @@
 	class AppointmentPage_Controller extends FormPage_Controller
 	{	
 	
+		public function FormFields()
+		{
+			return array(
+				"FirstName" => array(
+					"FieldType" => "TextField",
+					"Required" => true
+				), 
+				"LastName" => array(
+					"FieldType" => "TextField",
+					"Required" => true
+				), 
+				"Email" => array(
+					"FieldType" => "EmailField",
+					"Required" => true
+				), 
+				"Phone" => array(
+					"FieldType" => "TextField"
+				), 
+				"Recipient" => array(
+					"FieldType" => "DropdownField",
+					"Value" => "FindRecipients"
+				),
+				"Date1" => array(
+					"FieldType" => "DateField",
+					"Label" => "Date (First Choice)",
+					"Required" => true,
+				),
+				"Time1" => array(
+					"FieldType" => "DropdownField",
+					"Label" => "Time (First Choice)",
+					"Required" => true,
+					"ExtraClass" => "time",
+					"Value" => "AllowedTimeArray"
+				),
+				"Date2" => array(
+					"FieldType" => "DateField",
+					"Label" => "Date (Second Choice)",
+				),
+				"Time2" => array(
+					"FieldType" => "DropdownField",
+					"Label" => "Time (Second Choice)",
+					"ExtraClass" => "time",
+					"Value" => "AllowedTimeArray"
+				),
+				"Date3" => array(
+					"FieldType" => "DateField",
+					"Label" => "Date (Third Choice)",
+				),
+				"Time3" => array(
+					"FieldType" => "DropdownField",
+					"Label" => "Time (Third Choice)",
+					"ExtraClass" => "time",
+					"Value" => "AllowedTimeArray"
+				),
+				"Comments" => array(
+					"FieldType" => "TextAreaField"
+				)
+			);
+		}
+	
 		public function AllowedTimeArray(){
 			$full = $this->TimeArray();
 			$allowed = array();
@@ -208,62 +268,5 @@
 			";
 			return $js;
 		}
-		
-		public $form_fields = array(
-			"FirstName" => array(
-				"FieldType" => "TextField",
-				"Required" => true
-			), 
-			"LastName" => array(
-				"FieldType" => "TextField",
-				"Required" => true
-			), 
-			"Email" => array(
-				"FieldType" => "EmailField",
-				"Required" => true
-			), 
-			"Phone" => array(
-				"FieldType" => "TextField"
-			), 
-			"Recipient" => array(
-				"FieldType" => "DropdownField",
-				"Value" => "FindRecipients"
-			),
-			"Date1" => array(
-				"FieldType" => "DateField",
-				"Label" => "Date (First Choice)",
-				"Required" => true,
-			),
-			"Time1" => array(
-				"FieldType" => "DropdownField",
-				"Label" => "Time (First Choice)",
-				"Required" => true,
-				"ExtraClass" => "time",
-				"Value" => "AllowedTimeArray"
-			),
-			"Date2" => array(
-				"FieldType" => "DateField",
-				"Label" => "Date (Second Choice)",
-			),
-			"Time2" => array(
-				"FieldType" => "DropdownField",
-				"Label" => "Time (Second Choice)",
-				"ExtraClass" => "time",
-				"Value" => "AllowedTimeArray"
-			),
-			"Date3" => array(
-				"FieldType" => "DateField",
-				"Label" => "Date (Third Choice)",
-			),
-			"Time3" => array(
-				"FieldType" => "DropdownField",
-				"Label" => "Time (Third Choice)",
-				"ExtraClass" => "time",
-				"Value" => "AllowedTimeArray"
-			),
-			"Comments" => array(
-				"FieldType" => "TextAreaField"
-			)
-		);
 		
 	}
