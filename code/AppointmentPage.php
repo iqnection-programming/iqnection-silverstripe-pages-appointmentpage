@@ -155,7 +155,7 @@
 					"FieldType" => "DropdownField",
 					"Label" => "Time (First Choice)",
 					"Required" => true,
-					"ExtraClass" => "time",
+					"ExtraClass" => "time_dropdown",
 					"Value" => "AllowedTimeArray"
 				),
 				"Date2" => array(
@@ -165,7 +165,7 @@
 				"Time2" => array(
 					"FieldType" => "DropdownField",
 					"Label" => "Time (Second Choice)",
-					"ExtraClass" => "time",
+					"ExtraClass" => "time_dropdown",
 					"Value" => "AllowedTimeArray"
 				),
 				"Date3" => array(
@@ -175,7 +175,7 @@
 				"Time3" => array(
 					"FieldType" => "DropdownField",
 					"Label" => "Time (Third Choice)",
-					"ExtraClass" => "time",
+					"ExtraClass" => "time_dropdown",
 					"Value" => "AllowedTimeArray"
 				),
 				"Comments" => array(
