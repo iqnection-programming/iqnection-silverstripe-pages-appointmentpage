@@ -151,23 +151,21 @@
 	
 		function PageCSS()
 		{
-			$dir = ViewableData::ThemeDir();
 			return array_merge(
 				parent::PageCSS(),
 				array(
-					$dir."/javascript/jquery-ui.min.css",
-					$dir."/javascript/jquery.ui.theme.css"
+					"iq-appointmentpage/javascript/jquery-ui.min.css",
+					"iq-appointmentpage/javascript/jquery.ui.theme.css"
 				)
 			);
 		}
 		
 		function PageJS()
 		{
-			$dir = ViewableData::ThemeDir();
 			return array_merge(
 				parent::PageJS(),
 				array(
-					$dir."/javascript/jquery-ui.js"
+					"iq-appointmentpage/javascript/jquery-ui.js"
 				)
 			);
 		}
