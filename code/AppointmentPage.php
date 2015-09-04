@@ -14,10 +14,12 @@
         {
 			$date = new DateField("Date", "Date:");
 			$date->setConfig('showcalendar',true);
-			return new FieldList(
+			$fields = new FieldList(
 				new TextField("Title", "Title:"),
 				$date
 			);
+			$this->extend('updateCMSFields',$fields);
+			return $fields;
         }
 		
 		private static $summary_fields = array(
@@ -58,25 +60,38 @@
 		
 		private static $default_sort = "Created DESC";	
 		
+		function getCMSFields()
+		{
+			$fields = parent::getCMSFields();
+			$this->extend('updateCMSFields',$fields);
+			return $fields;
+		}
+				
+		public function canCreate($member = null) { return false; }
 		public function canDelete($member = null) { return true; }
-		public function canEdit($member = null)   { return true; }
+		public function canEdit($member = null)   { return false; }
 		public function canView($member = null)   { return true; }
 	}
 	
 	class AppointmentPage extends FormPage
 	{
 		
-		static $db = array(
+		private static $db = array(
 			"BlockWeekends" => "Boolean",
 			"OpenTime" => "Varchar(255)",
 			"CloseTime" => "Varchar(255)",
 			"AutoResponderSubject" => "Varchar(255)",
-			"AutoResponder" => "HTMLText"
+			"AutoResponder" => "HTMLText",
+			'TimeStep' => 'Int'
 		);
 
-		static $has_many = array(
+		private static $has_many = array(
 			"BlockedAppointmentDates" => "BlockedAppointmentDate",
 			"AppointmentFormRecipients" => "AppointmentFormRecipient"
+		);
+		
+		private static $defaults = array(
+			'TimeStep' => '15'
 		);
 		
 		public function getCMSFields()
@@ -93,21 +108,28 @@
 				new GridFieldDeleteAction(),
 				new GridFieldDetailForm()				
 			);
-			$fields->addFieldToTab('Root.Content.AppointmentSettings', new GridField('BlockedAppointmentDates','Blocked Appointment Dates',$this->BlockedAppointmentDates(),$blocked_config));
+			$fields->addFieldToTab('Root.AppointmentSettings', new GridField('BlockedAppointmentDates','Blocked Appointment Dates',$this->BlockedAppointmentDates(),$blocked_config));
 			
-			$fields->addFieldToTab("Root.Content.AppointmentSettings", new CheckboxField("BlockWeekends", "Block Weekends?")); 
-			$fields->addFieldToTab("Root.Content.AppointmentSettings", new DropdownField("OpenTime", "Opening Time", $this->TimeArray())); 
-			$fields->addFieldToTab("Root.Content.AppointmentSettings", new DropdownField("CloseTime", "Closing Time", $this->TimeArray()));
-			$fields->addFieldToTab("Root.Content.AppointmentSettings", new TextField("AutoResponderSubject", "Auto-responder Subject")); 
-			$fields->addFieldToTab("Root.Content.AppointmentSettings", new HTMLEditorField("AutoResponder", "Auto-responder Body"));
-
+			$fields->addFieldToTab("Root.AppointmentSettings", new CheckboxField("BlockWeekends", "Block Weekends?")); 
+			$fields->addFieldToTab('Root.AppointmentSettings', new NumericField('TimeStep','Time Step (in time selection)') );
+			$fields->addFieldToTab("Root.AppointmentSettings", new DropdownField("OpenTime", "Opening Time", $this->TimeArray())); 
+			$fields->addFieldToTab("Root.AppointmentSettings", new DropdownField("CloseTime", "Closing Time", $this->TimeArray()));
+			$fields->addFieldToTab("Root.AppointmentSettings", new TextField("AutoResponderSubject", "Auto-responder Subject")); 
+			$fields->addFieldToTab("Root.AppointmentSettings", new HTMLEditorField("AutoResponder", "Auto-responder Body"));
+			
+			$this->extend('updateCMSFields',$fields);
 			return $fields;
 		}
 		
-		public function TimeArray(){
+		public function TimeArray()
+		{
 			$output = array();
-			for($h = 12,$k = 1; $k<3; $h++){
-				for($m=0;$m<=45;$m+=15){
+			for($h = 12,$k = 1; $k<=2; $h++)
+			{
+				$TimeStep = ($this->TimeStep) ? $this->TimeStep : 15;
+				$maxMinute = 60 - $TimeStep;				
+				for($m=0;$m<=$maxMinute;$m+=$TimeStep)
+				{
 					$m = $m == 0 ? "00" : $m;
 					$section = $k == 1 ? "AM" : "PM";
 					$time = $h.":".$m." ".$section;
@@ -126,7 +148,7 @@
 	
 		public function FormFields()
 		{
-			return array(
+			$fields = array(
 				"FirstName" => array(
 					"FieldType" => "TextField",
 					"Required" => true
@@ -142,10 +164,7 @@
 				"Phone" => array(
 					"FieldType" => "TextField"
 				), 
-				"Recipient" => array(
-					"FieldType" => "DropdownField",
-					"Value" => "FindRecipients"
-				),
+				"Recipient" => $this->RecipientFieldConfig(),
 				"Date1" => array(
 					"FieldType" => "DateField",
 					"Label" => "Date (First Choice)",
@@ -182,8 +201,19 @@
 					"FieldType" => "TextAreaField"
 				)
 			);
+			$this->extend('updateFormFields',$fields);
+			return $fields;
 		}
 	
+		function FormConfig()
+		{
+			$config = array(
+				'UseNoSpam' => true
+			);
+			$this->extend('updateFormConfig',$config);
+			return $config;
+		}
+		
 		public function AllowedTimeArray(){
 			$full = $this->TimeArray();
 			$allowed = array();
@@ -209,23 +239,27 @@
 	
 		function PageCSS()
 		{
-			return array_merge(
+			$CSS = array_merge(
 				parent::PageCSS(),
 				array(
 					"iq-appointmentpage/javascript/jquery-ui.min.css",
 					"iq-appointmentpage/javascript/jquery.ui.theme.css"
 				)
 			);
+			$this->extend('updatePageCSS',$CSS);
+			return $CSS;
 		}
 		
 		function PageJS()
 		{
-			return array_merge(
+			$JS = array_merge(
 				parent::PageJS(),
 				array(
 					"iq-appointmentpage/javascript/jquery-ui.js"
 				)
 			);
+			$this->extend('updatePageJS',$JS);
+			return $JS;
 		}
 	
 		function CustomJS()
@@ -266,6 +300,7 @@
 				return noWeekend[0] ? blockedDays(date) : noWeekend;
 			}
 			";
+			$this->extend('updateCustomJS',$js);
 			return $js;
 		}
 		
