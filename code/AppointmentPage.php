@@ -12,12 +12,8 @@
 		
         public function getCMSFields()
         {
-			$date = new DateField("Date", "Date:");
-			$date->setConfig('showcalendar',true);
-			$fields = new FieldList(
-				new TextField("Title", "Title:"),
-				$date
-			);
+			$fields = parent::getCMSFields();
+			$fields->replaceField('Date',DateField::create('Date')->setConfig('showcalendar',true));
 			$this->extend('updateCMSFields',$fields);
 			return $fields;
         }
@@ -33,7 +29,7 @@
 		public function canView($member = null)   { return true; }
 	}
 	
-	class AppointmentPageSubmission extends DataObject
+	class AppointmentPageSubmission extends FormPageSubmission
 	{
 		private static $db = array( 
 			"FirstName" => "Varchar(255)", 
@@ -51,7 +47,7 @@
 		);
 		
 		private static $summary_fields = array(
-			"Created" => "Date",
+			"Created.Nice" => "Date",
 			"FirstName" => "First Name",
 			"LastName" => "Last Name",
 			"Email" => "Email Address",
@@ -87,7 +83,6 @@
 
 		private static $has_many = array(
 			"BlockedAppointmentDates" => "BlockedAppointmentDate",
-			"AppointmentFormRecipients" => "AppointmentFormRecipient"
 		);
 		
 		private static $defaults = array(
@@ -208,7 +203,7 @@
 		function FormConfig()
 		{
 			$config = array(
-				'UseNoSpam' => true
+				'useNospam' => true
 			);
 			$this->extend('updateFormConfig',$config);
 			return $config;

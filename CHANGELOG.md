@@ -1,5 +1,8 @@
-## Package: iqnection-silverstripe-3-mysite
+## Package: iqnection-silverstripe-3-appointmentpage
 # Change Log
+
+## [0.1.4]
+- bug fixes, updates to meet base pages requirements
 
 ## [0.1.3]
 - made CMS fields extendable
