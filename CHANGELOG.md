@@ -1,6 +1,9 @@
 ## Package: iqnection-silverstripe-3-appointmentpage
 # Change Log
 
+## [0.2.0]
+- Added ability to block any week day
+
 ## [0.1.4]
 - bug fixes, updates to meet base pages requirements
 

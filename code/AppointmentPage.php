@@ -74,6 +74,7 @@
 		
 		private static $db = array(
 			"BlockWeekends" => "Boolean",
+			'BlockedWeekdays' => 'Text',
 			"OpenTime" => "Varchar(255)",
 			"CloseTime" => "Varchar(255)",
 			"AutoResponderSubject" => "Varchar(255)",
@@ -106,6 +107,7 @@
 			$fields->addFieldToTab('Root.AppointmentSettings', new GridField('BlockedAppointmentDates','Blocked Appointment Dates',$this->BlockedAppointmentDates(),$blocked_config));
 			
 			$fields->addFieldToTab("Root.AppointmentSettings", new CheckboxField("BlockWeekends", "Block Weekends?")); 
+			$fields->addFieldToTab("Root.AppointmentSettings", new CheckboxSetField("BlockedWeekdays", "Block Weekdays",array(1=>'Sunday',2=>'Monday',3=>'Tuesday',4=>'Wednesday',5=>'Thursday',6=>'Friday',7=>'Saturday'))); 
 			$fields->addFieldToTab('Root.AppointmentSettings', new NumericField('TimeStep','Time Step (in time selection)') );
 			$fields->addFieldToTab("Root.AppointmentSettings", new DropdownField("OpenTime", "Opening Time", $this->TimeArray())); 
 			$fields->addFieldToTab("Root.AppointmentSettings", new DropdownField("CloseTime", "Closing Time", $this->TimeArray()));
@@ -140,17 +142,18 @@
 	
 	class AppointmentPage_Controller extends FormPage_Controller
 	{	
-	
 		public function FormFields()
 		{
 			$fields = array(
 				"FirstName" => array(
 					"FieldType" => "TextField",
-					"Required" => true
+					"Required" => true,
+					'FieldGroup' => 'Name'
 				), 
 				"LastName" => array(
 					"FieldType" => "TextField",
-					"Required" => true
+					"Required" => true,
+					'FieldGroup' => 'Name'
 				), 
 				"Email" => array(
 					"FieldType" => "EmailField",
@@ -273,6 +276,7 @@
 			$js .= "
 			var checker = ".$checker.";
 			var disabledDays = [".$blocks."];
+			var disabledWeekdays = [".$this->BlockedWeekdays."];
 			
 			$(document).ready(function(){
 				$('input.date').datepicker({
@@ -281,9 +285,10 @@
 				});
 			});
 			function blockedDays(date) {
-				var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+				var m = date.getMonth(), d = date.getDate(), y = date.getFullYear(),wkdy = date.getDay();
+				// check blocked dates
 				for (i = 0; i < disabledDays.length; i++) {
-					if($.inArray((m+1) + '-' + d + '-' + y,disabledDays) != -1 || new Date() > date) {
+					if($.inArray((m+1) + '-' + d + '-' + y,disabledDays) != -1 || $.inArray((wkdy+1),disabledWeekdays) != -1 || new Date() > date) {
 						return [false];
 					}
 				}
