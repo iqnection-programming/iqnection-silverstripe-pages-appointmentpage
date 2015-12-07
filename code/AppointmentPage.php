@@ -148,12 +148,12 @@
 				"FirstName" => array(
 					"FieldType" => "TextField",
 					"Required" => true,
-					'FieldGroup' => 'Name'
+					'Group' => 'Name'
 				), 
 				"LastName" => array(
 					"FieldType" => "TextField",
 					"Required" => true,
-					'FieldGroup' => 'Name'
+					'Group' => 'Name'
 				), 
 				"Email" => array(
 					"FieldType" => "EmailField",
