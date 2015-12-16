@@ -1,6 +1,10 @@
 ## Package: iqnection-silverstripe-3-appointmentpage
 # Change Log
 
+## [1.0.0]
+- Stable build
+- Added functionality for auto responder from email
+
 ## [0.2.0]
 - Added ability to block any week day
 

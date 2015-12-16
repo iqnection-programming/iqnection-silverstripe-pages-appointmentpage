@@ -77,6 +77,7 @@
 			'BlockedWeekdays' => 'Text',
 			"OpenTime" => "Varchar(255)",
 			"CloseTime" => "Varchar(255)",
+			"AutoResponderFromEmail" => "Varchar(255)",
 			"AutoResponderSubject" => "Varchar(255)",
 			"AutoResponder" => "HTMLText",
 			'TimeStep' => 'Int'
