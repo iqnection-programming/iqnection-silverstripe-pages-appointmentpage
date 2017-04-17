@@ -1,6 +1,9 @@
 ## Package: iqnection-silverstripe-3-appointmentpage
 # Change Log
 
+## [1.0.1]
+- Updated with ability to include submission data in auto responder
+
 ## [1.0.0]
 - Stable build
 - Added functionality for auto responder from email
