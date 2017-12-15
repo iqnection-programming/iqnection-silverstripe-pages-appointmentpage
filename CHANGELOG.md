@@ -1,5 +1,8 @@
-## Package: iqnection-silverstripe-3-appointmentpage
+## Package: iqnection-silverstripe-appointmentpage
 # Change Log
+
+## [2.0.0]
+- updated for SilverStripe 4
 
 ## [1.0.1]
 - Updated with ability to include submission data in auto responder
