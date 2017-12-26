@@ -1,6 +1,9 @@
 ## Package: iqnection-silverstripe-appointmentpage
 # Change Log
 
+## [2.0.1]
+- added empty values to dropdowns
+
 ## [2.0.0]
 - updated for SilverStripe 4
 
