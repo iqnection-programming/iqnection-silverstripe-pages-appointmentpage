@@ -34,7 +34,8 @@ class AppointmentFormPageController extends FormPageController
 				"Label" => "Time (First Choice)",
 				"Required" => true,
 				"ExtraClass" => "time_dropdown",
-				"Value" => "AllowedTimeArray"
+				"Value" => "AllowedTimeArray",
+				'EmptyString' => '-- Select --'
 			),
 			"Date2" => array(
 				"FieldType" => "DateField",
@@ -44,7 +45,8 @@ class AppointmentFormPageController extends FormPageController
 				"FieldType" => "DropdownField",
 				"Label" => "Time (Second Choice)",
 				"ExtraClass" => "time_dropdown",
-				"Value" => "AllowedTimeArray"
+				"Value" => "AllowedTimeArray",
+				'EmptyString' => '-- Select --'
 			),
 			"Date3" => array(
 				"FieldType" => "DateField",
@@ -54,7 +56,8 @@ class AppointmentFormPageController extends FormPageController
 				"FieldType" => "DropdownField",
 				"Label" => "Time (Third Choice)",
 				"ExtraClass" => "time_dropdown",
-				"Value" => "AllowedTimeArray"
+				"Value" => "AllowedTimeArray",
+				'EmptyString' => '-- Select --'
 			),
 			"Comments" => array(
 				"FieldType" => "TextAreaField"
