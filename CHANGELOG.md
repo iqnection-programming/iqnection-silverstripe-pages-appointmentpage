@@ -1,6 +1,9 @@
 ## Package: iqnection-silverstripe-appointmentpage
 # Change Log
 
+## [2.1.0]
+- added $table_name var to BlockedAppointmentDate
+
 ## [2.0.1]
 - added empty values to dropdowns
 

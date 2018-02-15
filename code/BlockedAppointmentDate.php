@@ -7,6 +7,8 @@ use SilverStripe\Forms;
 
 class BlockedAppointmentDate extends ORM\DataObject
 {
+	private static $table_name = 'BlockedAppointmentDate';
+	
 	private static $db = [
 		"Title" => "Varchar(255)", 
 		"Date" => "Date" 
