@@ -11,10 +11,19 @@
 		}
 	],
 	"require": {
-		"silverstripe/framework": "^4.0",
-		"iqnection-pages/basepages":"^2.0"
+		"silverstripe/framework": "^4.1",
+		"iqnection-pages/basepages":"^2.1"
 	},
 	"extra": {
-		"installer-name": "iq-appointmentformpage"
+		"expose": [
+			"css",
+			"images",
+			"javascript"
+		]
+	},
+	"autoload": {
+		"psr-4": {
+			"IQnection\\AppointmentFormPage\\": "app/src/"
+		}
 	}
 }

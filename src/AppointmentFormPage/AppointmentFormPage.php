@@ -1,10 +1,15 @@
 <?php
 
+namespace IQnection\AppointmentFormPage;
+
+use IQnection\FormPage\FormPage;
 use SilverStripe\Forms;
 
 class AppointmentFormPage extends FormPage
 {
-	private static $icon = "iq-appointmentformpage/images/icons/appointmentformpage-icon.png";
+	private static $table_name = 'AppointmentFormPage';
+	
+	private static $icon = "resources/iqnection/appointmentformpage/images/icons/appointmentformpage-icon.png";
 	
 	private static $db = [
 		"BlockWeekends" => "Boolean",
@@ -19,8 +24,8 @@ class AppointmentFormPage extends FormPage
 	];
 
 	private static $has_many = [
-		"BlockedAppointmentDates" => \IQnection\AppointmentFormPage\BlockedAppointmentDate::class,
-		"AppointmentFormPageSubmissions" => AppointmentFormPageSubmission::class
+		"BlockedAppointmentDates" => \IQnection\AppointmentFormPage\Model\BlockedAppointmentDate::class,
+		"AppointmentFormPageSubmissions" => \IQnection\AppointmentFormPage\Model\AppointmentFormPageSubmission::class
 	];
 	
 	private static $defaults = [

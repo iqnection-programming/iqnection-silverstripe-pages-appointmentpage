@@ -1,6 +1,6 @@
 <?php
 
-namespace IQnection\AppointmentFormPage;
+namespace IQnection\AppointmentFormPage\Model;
 
 use SilverStripe\ORM;
 use SilverStripe\Forms;
@@ -15,7 +15,7 @@ class BlockedAppointmentDate extends ORM\DataObject
 	];
 	
 	private static $has_one = [
-		"AppointmentPage" => \AppointmentFormPage::class
+		"AppointmentPage" => \IQnection\AppointmentFormPage\AppointmentFormPage::class
 	];
 	
 	private static $summary_fields = [

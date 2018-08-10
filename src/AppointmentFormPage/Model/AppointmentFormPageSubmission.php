@@ -1,8 +1,13 @@
 <?php
 
+namespace IQnection\AppointmentFormPage\Model;
+
+use IQnection\FormPage\Model\FormPageSubmission;
 
 class AppointmentFormPageSubmission extends FormPageSubmission
 {
+	private static $table_name = 'AppointmentFormPageSubmission';
+	
 	private static $db = [ 
 		"FirstName" => "Varchar(255)", 
 		"LastName" => "Varchar(255)", 

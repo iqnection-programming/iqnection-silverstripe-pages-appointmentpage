@@ -1,5 +1,8 @@
 <?php
 
+namespace IQnection\AppointmentFormPage;
+
+use IQnection\FormPage\FormPageController;
 
 class AppointmentFormPageController extends FormPageController
 {	
