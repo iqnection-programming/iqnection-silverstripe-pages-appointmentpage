@@ -1,6 +1,9 @@
 ## Package: iqnection-silverstripe-appointmentpage
 # Change Log
 
+## [2.1.2]
+- Improvements
+
 ## [2.1.1]
 - updated to follow SS 4.1 /public/ directory structure
 

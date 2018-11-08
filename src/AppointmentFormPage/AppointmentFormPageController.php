@@ -133,43 +133,16 @@ class AppointmentFormPageController extends FormPageController
 	public function CustomJS()
 	{
 		$js = parent::CustomJS();
-		$checker = $this->BlockWeekends ? "noWeekendsOrBlocked" : "blockedDays";
-		$blocks = "";
-		$bt = count($this->BlockedAppointmentDates()->toArray());
-		$i = 1;
-		foreach($this->BlockedAppointmentDates()->toArray() as $blocked)
+		$blocks = [];
+		foreach($this->BlockedAppointmentDates() as $blocked)
 		{
-			$blocks .= "'".date('n-j-Y' ,strtotime($blocked->Date))."'";
-			if($i < $bt)$blocks .= ",";
-			$i++;
+			$blocks[] = date('n-j-Y' ,strtotime($blocked->Date));
 		}
-		$js .= "
-		var checker = ".$checker.";
-		var disabledDays = [".$blocks."];
-		var disabledWeekdays = [".$this->BlockedWeekdays."];
-		
-		$(document).ready(function(){
-			$('input.date').datepicker({
-				minDate: 0,
-				beforeShowDay: eval(checker)
-			});
-		});
-		function blockedDays(date) {
-			var m = date.getMonth(), d = date.getDate(), y = date.getFullYear(),wkdy = date.getDay();
-			// check blocked dates
-			for (i = 0; i < disabledDays.length; i++) {
-				if($.inArray((m+1) + '-' + d + '-' + y,disabledDays) != -1 || $.inArray((wkdy+1),disabledWeekdays) != -1 || new Date() > date) {
-					return [false];
-				}
-			}
-			return [true];
-		}
-		
-		function noWeekendsOrBlocked(date) {
-			var noWeekend = jQuery.datepicker.noWeekends(date);
-			return noWeekend[0] ? blockedDays(date) : noWeekend;
-		}
-		";
+		$js .= 
+"window._apptPage = window._apptPage || {};
+window._apptPage.blockWeekends = ".($this->BlockWeekends ? "true" : 'false').";
+window._apptPage.disabledDays = ".json_encode($blocks).";
+window._apptPage.disabledWeekdays = [".$this->BlockedWeekdays."];";
 		$this->extend('updateCustomJS',$js);
 		return $js;
 	}
