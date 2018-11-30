@@ -9,7 +9,7 @@ class AppointmentFormPage extends FormPage
 {
 	private static $table_name = 'AppointmentFormPage';
 	
-	private static $icon = "iqnection-pages/appointmentformpage:images/icons/appointmentformpage-icon.png";
+	private static $icon = "iqnection-pages/appointmentpage:images/icons/appointmentformpage-icon.png";
 	
 	private static $db = [
 		"BlockWeekends" => "Boolean",

@@ -28,37 +28,43 @@ class AppointmentFormPageController extends FormPageController
 			), 
 			"Recipient" => $this->RecipientFieldConfig(),
 			"Date1" => array(
-				"FieldType" => "DateField",
-				"Label" => "Date (First Choice)",
+				"FieldType" => "TextField",
+				"Label" => "Date",
+				"ExtraClass" => "date",
 				"Required" => true,
+				'Group' => 'Date (First Choice)'
 			),
 			"Time1" => array(
 				"FieldType" => "DropdownField",
-				"Label" => "Time (First Choice)",
+				"Label" => "Time",
+				'Group' => 'Date (First Choice)',
 				"Required" => true,
-				"ExtraClass" => "time_dropdown",
 				"Value" => "AllowedTimeArray",
 				'EmptyString' => '-- Select --'
 			),
 			"Date2" => array(
-				"FieldType" => "DateField",
-				"Label" => "Date (Second Choice)",
+				"FieldType" => "TextField",
+				"Label" => "",
+				"ExtraClass" => "date",
+				'Group' => 'Date (Second Choice)',
 			),
 			"Time2" => array(
 				"FieldType" => "DropdownField",
-				"Label" => "Time (Second Choice)",
-				"ExtraClass" => "time_dropdown",
+				"Label" => "",
+				'Group' => 'Date (Second Choice)',
 				"Value" => "AllowedTimeArray",
 				'EmptyString' => '-- Select --'
 			),
 			"Date3" => array(
-				"FieldType" => "DateField",
-				"Label" => "Date (Third Choice)",
+				"FieldType" => "TextField",
+				"ExtraClass" => "date",
+				'Group' => 'Date (Third Choice)',
+				"Label" => "",
 			),
 			"Time3" => array(
 				"FieldType" => "DropdownField",
-				"Label" => "Time (Third Choice)",
-				"ExtraClass" => "time_dropdown",
+				"Label" => "",
+				'Group' => 'Date (Third Choice)',
 				"Value" => "AllowedTimeArray",
 				'EmptyString' => '-- Select --'
 			),
