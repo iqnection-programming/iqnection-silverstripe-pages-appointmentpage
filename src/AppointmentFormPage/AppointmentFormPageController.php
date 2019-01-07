@@ -113,29 +113,6 @@ class AppointmentFormPageController extends FormPageController
 		return $allowed;
 	}
 
-	public function PageCSS()
-	{
-		$CSS = array_merge(
-			parent::PageCSS(),
-			array(
-				"javascript/jquery-ui.min.css",
-				"javascript/jquery.ui.theme.css"
-			)
-		);
-		return $CSS;
-	}
-	
-	public function PageJS()
-	{
-		$JS = array_merge(
-			parent::PageJS(),
-			array(
-				"javascript/jquery-ui.js"
-			)
-		);
-		return $JS;
-	}
-
 	public function CustomJS()
 	{
 		$js = parent::CustomJS();

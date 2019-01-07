@@ -1,6 +1,9 @@
 ## Package: iqnection-silverstripe-appointmentpage
 # Change Log
 
+## [2.1.3]
+- Moved jQuery UI dependancy to the current theme
+
 ## [2.1.2]
 - Improvements
 
